@@ -1,26 +1,25 @@
 IDIR =../include
 CC=gcc
-CFLAGS=-Wall -I$(IDIR)
 
+CFLAGS= -std=c18 -Wall -Wextra -I$(IDIR)
 
 ODIR=../obj
 LDIR =../lib
 
-LIBS=-lm -L$(LDIR)
+LIBS= -lm -L$(LDIR)
 
-_DEPS = sphere.h disc.h triangle.h tetrahedron.h
-
+_DEPS = sphere.h disc.h triangle.h chevron.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = shape.o sphere.o disc.o triangle.o tetrahedron.o
+_OBJ = shape.o sphere.o disc.o triangle.o chevron.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-
 $(ODIR)/%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS) ${args}
+	$(CC) -c -o $@ $< $(CFLAGS)
+
 
 ../bin/shape: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS) $(LIBS) ${args}
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean run
 
@@ -28,4 +27,4 @@ clean:
 	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~
 
 run:
-	../bin/shape.exe
+	../bin/shape
