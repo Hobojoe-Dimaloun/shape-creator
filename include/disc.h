@@ -2,6 +2,6 @@
 #define DISC_H
 
 #include <stdio.h>
-void disc(double radius,double thickness, int maxDimensions[3],int distance,int numOfParticles, FILE *output, FILE *output2);
+void disc(int maxDimensions[3],double radius, FILE *output);
 
 #endif // DISC_H

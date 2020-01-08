@@ -20,15 +20,14 @@
 
 #include "sphere.h"
 
-void sphere(double radius, int maxDimensions[3],int distance,int numOfParticles, FILE *output, FILE *output2)
+void sphere(int maxDimensions[3],double radius, FILE *output)
 {
 	int x_MAX = maxDimensions[0];
 	int y_MAX = maxDimensions[1];
 	int z_MAX = maxDimensions[2];
 	int n = 0;
 
-	fprintf(output,"%d\n%d\n%d\n",x_MAX+0*(numOfParticles-1),y_MAX+0*(numOfParticles-1),z_MAX+distance*(numOfParticles-1));
-	fprintf(output2,"%d\n%d\n%d\n",x_MAX,y_MAX,z_MAX);
+	fprintf(output,"%d\n%d\n%d\n",x_MAX,y_MAX,z_MAX);
 
     for(int i=0; i<maxDimensions[0];i++)
     {
@@ -44,31 +43,21 @@ void sphere(double radius, int maxDimensions[3],int distance,int numOfParticles,
             }
         }
     }
-     fprintf(output,"%d\n",n*numOfParticles);
-	 fprintf(output2,"%d\n",n);
-	 fprintf(output2,"%d\n",numOfParticles);
+     fprintf(output,"%d\n",n);
 
-	 for(int z = 0; z < numOfParticles; z++)
-	 {
-	    for(int k=0; k<maxDimensions[0];k++)
-	    {
-	        for(int j=0;j<maxDimensions[1];j++)
-	        {
-	            for(int i=0; i<maxDimensions[2];i++)
-	            {
-	                if((pow(i-x_MAX/2,2)+pow(j-y_MAX/2,2)+pow(k-z_MAX/2,2))<=(radius*radius))
-	                {
-	                    fprintf(output,"%d\t%d\t%d\n",i+z*0,j+z*0,k+z*distance);
-						if(z==0)
-						{
-							fprintf(output2,"%d\t%d\t%d\n",i+z*0,j+z*0,k+z*distance);
+	for(int k=0; k<maxDimensions[0];k++)
+    {
+        for(int j=0;j<maxDimensions[1];j++)
+        {
+            for(int i=0; i<maxDimensions[2];i++)
+            {
+                if((pow(i-x_MAX/2,2)+pow(j-y_MAX/2,2)+pow(k-z_MAX/2,2))<=(radius*radius))
+                {
+                    fprintf(output,"%d\t%d\t%d\n",i,j,k);
+                }
+            }
+        }
 
-						}
-	                }
-	            }
-	        }
-	    }
 	}
-    fclose(output);
     printf("n=%d\n",n);
 }

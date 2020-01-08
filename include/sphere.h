@@ -2,6 +2,6 @@
 #define SPHERE_H
 
 #include <stdio.h>
-void sphere(double radius, int maxDimensions[3],int distance,int numOfParticles, FILE *output, FILE *output2);
+void sphere(int maxDimensions[3],double radius, FILE *output);
 
 #endif // SPHERE_H

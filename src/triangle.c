@@ -13,7 +13,7 @@
 
 #include "triangle.h"
 
-void triangle(int maxDimensions[3],int numOfParticles,double slope,int thickness, FILE *output)
+void triangle(int maxDimensions[3],double slope, FILE *output)
 {
 	int x_MAX = maxDimensions[0];
 	int y_MAX = maxDimensions[1];
@@ -30,7 +30,7 @@ void triangle(int maxDimensions[3],int numOfParticles,double slope,int thickness
         {
             for(int k=0; k<z_MAX;k++)
             {
-                if ( (j<=i*slope && k<thickness && i<=(x_MAX)/2-1) || (j<=(x_MAX-i-1)*slope && k<thickness && i>x_MAX/2-1) )
+                if ( (j<=i*slope && k<z_MAX && i<=(x_MAX)/2-1) || (j<=(x_MAX-i-1)*slope && k<z_MAX && i>x_MAX/2-1) )
                 {
 
                     n++;
@@ -46,7 +46,7 @@ void triangle(int maxDimensions[3],int numOfParticles,double slope,int thickness
         {
             for(int i=0; i<x_MAX;i++)
             {
-				if ( (j<=i*slope && k<thickness && i<=(x_MAX)/2-1) || (j<=(x_MAX-i-1)*slope && k<thickness && i>x_MAX/2-1) )
+				if ( (j<=i*slope && k<z_MAX && i<=(x_MAX)/2-1) || (j<=(x_MAX-i-1)*slope && k<z_MAX && i>x_MAX/2-1) )
                 {
 
                     fprintf(output,"%d\t%d\t%d\n",i,j,k);
@@ -56,6 +56,5 @@ void triangle(int maxDimensions[3],int numOfParticles,double slope,int thickness
         }
     }
 
-    fclose(output);
     printf("n=%d\n",n);
 }
