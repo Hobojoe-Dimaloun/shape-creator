@@ -29,11 +29,11 @@ void sphere(int maxDimensions[3],double radius, FILE *output)
 
 	fprintf(output,"%d\n%d\n%d\n",x_MAX,y_MAX,z_MAX);
 
-    for(int i=0; i<maxDimensions[0];i++)
+	for(int i=0; i<x_MAX;i++)
     {
-        for(int j=0;j<maxDimensions[1];j++)
+        for(int j=0;j<y_MAX;j++)
         {
-            for(int k=0; k<maxDimensions[2];k++)
+            for(int k=0; k<z_MAX;k++)
             {
                  if((pow(i-x_MAX/2 ,2)+pow(j-y_MAX/2 ,2)+pow(k-z_MAX/2,2))<=(radius*radius))
                 {
@@ -45,12 +45,12 @@ void sphere(int maxDimensions[3],double radius, FILE *output)
     }
      fprintf(output,"%d\n",n);
 
-	for(int k=0; k<maxDimensions[0];k++)
-    {
-        for(int j=0;j<maxDimensions[1];j++)
-        {
-            for(int i=0; i<maxDimensions[2];i++)
-            {
+	 for(int k=0; k<z_MAX;k++)
+     {
+         for(int j=0;j<y_MAX;j++)
+         {
+             for(int i=0; i<x_MAX;i++)
+             {
                 if((pow(i-x_MAX/2,2)+pow(j-y_MAX/2,2)+pow(k-z_MAX/2,2))<=(radius*radius))
                 {
                     fprintf(output,"%d\t%d\t%d\n",i,j,k);
