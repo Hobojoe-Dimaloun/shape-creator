@@ -6,6 +6,7 @@
 #include "triangle.h"
 #include "disc.h"
 #include "chevron.h"
+#include "cuboid.h"
 
 void mosh_dda_io_cmd_read_in(int argc, char *argv[], char **outputFileName, char** shape, int **dimensions, double *externalSlope,double *internalSlope, double *radius,double *offset);
 int call_shape_function(FILE *outputFile, char* shape, int *dimensions, double externalSlope, double internalSlope,  double radius,double offset);
@@ -38,12 +39,12 @@ int main(int argc, char *argv[])
 	if(outputFile==NULL)
 	return EXIT_FAILURE;
 
-	printf("Finding shape...\n");
+	printf("Finding shape...");
 	if(call_shape_function(outputFile, shape, dimensions, externalSlope,internalSlope,  radius,offset) != 0)
-	printf("no shape name recognised\n");
+	printf("no shape name recognised\nshape provided: %s\n",shape);
 	else
 	printf("Shape complete\n");
-
+	fflush(outputFile);
 	fclose(outputFile);
 
     return 0;
@@ -132,6 +133,12 @@ int call_shape_function(FILE *outputFile, char* shape, int *dimensions, double e
 	{
 		printf("found chevron\n");
 		chevron(dimensions, externalSlope,internalSlope,offset, outputFile);
+		return 0;
+	}
+	else if(strcmp(shape,"cuboid") == 0)
+	{
+		printf("found cuboid\n");
+		cuboid(dimensions, outputFile);
 		return 0;
 	}
 	else
